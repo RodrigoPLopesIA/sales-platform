@@ -15,3 +15,4 @@ app.get("/api/v1/health", (req, res) => {
 
 app.listen(PORT, () => console.log("http://localhost:8080/api/v1/health"))
 
+export default app
