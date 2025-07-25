@@ -1,0 +1,14 @@
+spring:
+    application: 
+        name: product_api
+    datasource:
+        url: ""
+        username: ""
+        password: ""
+        driver-class-name: ""
+    jpa:
+        show-sql: true
+
+        hibernate:
+            ddl-auto: update
+            
