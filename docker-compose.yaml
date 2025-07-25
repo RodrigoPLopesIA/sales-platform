@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  auth-db:
+    container_name: auth-db
+    image: postgres:11
+    restart: always
+    environment:
+      - POSTGRES_DB=auth_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - 5432:5432
+  product-db:
+    container_name: product-db
+    image: postgres:11
+    restart: always
+    environment:
+      - POSTGRES_DB=product_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - 5433:5432
+  sales-db:
+    container_name: sales-db
+    image: mongo:6.0
+    restart: always
+    environment:
+      - MONGODB_DATABASE=sales_db
+      - MONGODB_USER=admin
+      - MONGODB_PASS=123456
+    ports:
+      - 27017:27017
+      - 28017:28017
+  sales_rabbit:
+    container_name: sales_rabbit
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 25676:25676
+      - 15672:15672
