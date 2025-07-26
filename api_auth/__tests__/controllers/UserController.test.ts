@@ -5,7 +5,7 @@ import request from "supertest";
 import UserValidation from "../../src/validations/UserValidations";
 import HTTPErrorMiddleware from "../../src/middlewares/HTTPErrorMiddleware";
 import HTTPErrorMessage from "../../src/exceptions/HTTPErrorMessage";
-jest.mock("../../src/data-source");
+jest.mock("bcrypt")
 
 describe("User Controller Test", () => {
   let userService: jest.Mocked<UserService>;
@@ -38,7 +38,7 @@ describe("User Controller Test", () => {
     app.use(HTTPErrorMiddleware.execute);
   });
 
-  it.skip("should create a new user", async () => {
+  it("should create a new user", async () => {
     const result = await request(app)
       .post("/api/v1/users/register")
       .send({ email: "test@email.com", password: "123456123456" });
@@ -47,7 +47,7 @@ describe("User Controller Test", () => {
     expect(result.body.email).toEqual("test@email.com");
   });
 
-  it.skip("should return error 400 when try to create a user with null values", async () => {
+  it("should return error 400 when try to create a user with null values", async () => {
     const result = await request(app)
       .post("/api/v1/users/register")
       .send({ email: "", password: "" });
@@ -55,6 +55,16 @@ describe("User Controller Test", () => {
     expect(result.status).toEqual(400);
     expect(JSON.parse(result.text).validation.message).toEqual(
       '"email" is not allowed to be empty'
+    );
+  });
+  it("should return error 400 when try to create a user with null values", async () => {
+    const result = await request(app)
+      .post("/api/v1/users/register")
+      .send({ email: "test@email.com", password: "" });
+
+    expect(result.status).toEqual(400);
+    expect(JSON.parse(result.text).validation.message).toEqual(
+      '"password" is not allowed to be empty'
     );
   });
   it("should return a error 400 when try to create a user exists ", async () => {
@@ -66,7 +76,9 @@ describe("User Controller Test", () => {
       .send({ email: "test@email.com", password: "123456123456" });
 
     expect(result.status).toEqual(400);
-    expect(JSON.parse(result.text).status).toEqual(400)
-    expect(JSON.parse(result.text).message).toEqual("User with test@email.com already exists")
+    expect(JSON.parse(result.text).status).toEqual(400);
+    expect(JSON.parse(result.text).message).toEqual(
+      "User with test@email.com already exists"
+    );
   });
 });
