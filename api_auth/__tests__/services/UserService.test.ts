@@ -3,7 +3,7 @@ import { IUserRepository } from "../../src/interface/IUserRepository";
 import { User as UserDTO } from "../../src/model/User";
 
 import { UserService } from "../../src/service/UserService";
-jest.mock("../../src/data-source")
+jest.mock("../../src/data-source");
 
 describe("User Service Test", () => {
   let userService: UserService;
@@ -23,6 +23,7 @@ describe("User Service Test", () => {
 
     userRepository = {
       save: jest.fn().mockResolvedValue(mockUser),
+      existsByEmail: jest.fn().mockResolvedValue(false),
     } as jest.Mocked<IUserRepository>;
 
     userService = new UserService(userRepository);
@@ -38,8 +39,18 @@ describe("User Service Test", () => {
     expect(userRepository.save).toHaveBeenCalledWith({
       email: "test@email.com",
       password: "123456123456",
-    })
+    });
+  });
 
-    
+  it("Should return error when try to create a new user with email exists", async () => {
+    userRepository.existsByEmail.mockResolvedValueOnce(true);
+    await expect(
+      userService.save({
+        email: "test@email.com",
+        password: "123456123456",
+      })
+    ).rejects.toThrow("User with test@email.com already exists");
+
+
   });
 });

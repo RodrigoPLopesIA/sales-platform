@@ -1,6 +1,7 @@
 import { IUserRepository } from "../interface/IUserRepository";
 import { User as UserDTO } from "../model/User";
 import { User } from "../entity/User";
+import HTTPErrorMessage from "../exceptions/HTTPErrorMessage";
 
 export class UserService {
     
@@ -9,6 +10,10 @@ export class UserService {
     this.userRepository = userRepository;
   }
   public async save(data: UserDTO): Promise<User> {
-    return await this.userRepository.save(data);
+      if(await this.userRepository.existsByEmail(data.email))
+        throw new HTTPErrorMessage(400, `User with ${data.email} already exists`)
+      return await this.userRepository.save(data);
+      
+
   }
 }

@@ -12,6 +12,9 @@ export class UserRepository implements IUserRepository{
     constructor() {
        this.repository = AppDataSource.getRepository(User)
     }
+    async existsByEmail(email: string): Promise<Boolean> {
+        return await this.repository.existsBy({email})
+    }
     async save(user: UserDTO): Promise<User> {
         return await this.repository.save(user)
     }
