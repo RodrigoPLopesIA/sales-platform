@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import express from "express";
-import { AppDataSource } from "./data-source";
 import userRouter from "./routes/UserRouter";
-import { ErrorHandler } from "./exceptions/ErrorHandler";
 import logger from "./logs/Logger";
+import HTTPErrorMiddleware from "./middlewares/HTTPErrorMiddleware";
+import { errors } from "celebrate";
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -20,7 +20,7 @@ app.get("/api/v1/health", (req, res) => {
   });
 });
 
-app.use(ErrorHandler.execute);
+app.use(HTTPErrorMiddleware.execute);
 
 app.listen(PORT, () =>
   logger.info(`Server running at http://localhost:${PORT}/api/v1/health`)
