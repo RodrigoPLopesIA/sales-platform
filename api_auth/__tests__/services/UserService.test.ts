@@ -34,5 +34,11 @@ describe("User Service Test", () => {
     });
 
     expect(result.email).toEqual(mockUser.email);
+    expect(userRepository.save).toHaveBeenCalledWith({
+      email: "test@email.com",
+      password: "123456123456",
+    })
+
+    
   });
 });
