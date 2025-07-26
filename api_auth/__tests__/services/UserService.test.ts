@@ -1,15 +1,16 @@
 import { IUserRepository } from "../../src/interface/IUserRepository";
+import { User } from "../../src/model/User";
 import { UserService } from "../../src/service/UserService";
 
 describe("User Service Test", () => {
   let userService: UserService;
-  let userRepository: jest.Mock<IUserRepository>;
+  let userRepository: jest.Mocked<IUserRepository>;
   beforeAll(() => {
-    userService = new UserService();
-
     userRepository = {
       save: jest.fn(),
-    } as unknown as jest.Mock<IUserRepository>;
+    } as jest.Mocked<IUserRepository>;
+
+    userService = new UserService(userRepository);
   });
 
   it("Should create a new user", () => {
@@ -18,6 +19,6 @@ describe("User Service Test", () => {
       password: "123456123456",
     });
 
-    expect(result).toBeDefined();
+    expect(result).toBeInstanceOf(User)
   });
 });
