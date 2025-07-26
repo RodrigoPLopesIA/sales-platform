@@ -5,7 +5,7 @@ import request from "supertest";
 import UserValidation from "../../src/validations/UserValidations";
 import HTTPErrorMiddleware from "../../src/middlewares/HTTPErrorMiddleware";
 import HTTPErrorMessage from "../../src/exceptions/HTTPErrorMessage";
-jest.mock("bcrypt")
+
 
 describe("User Controller Test", () => {
   let userService: jest.Mocked<UserService>;
