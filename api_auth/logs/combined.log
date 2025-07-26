@@ -1,0 +1,10 @@
+[2025-07-26T19:11:38.089Z] INFO: Server running at http://localhost:8081/api/v1/health
+[2025-07-26T19:11:38.537Z] INFO: Server running at http://localhost:8081/api/v1/health
+[2025-07-26T19:12:14.532Z] INFO: Server running at http://localhost:8081/api/v1/health
+[2025-07-26T19:12:14.773Z] INFO: Database is running!
+[2025-07-26T19:12:20.212Z] INFO: Server running at http://localhost:8081/api/v1/health
+[2025-07-26T19:12:21.125Z] INFO: Database is running!
+[2025-07-26T19:12:22.227Z] INFO: Server running at http://localhost:8081/api/v1/health
+[2025-07-26T19:12:23.083Z] INFO: Database is running!
+[2025-07-26T19:12:36.068Z] INFO: Server running at http://localhost:8081/api/v1/health
+[2025-07-26T19:12:36.842Z] INFO: Database is running!

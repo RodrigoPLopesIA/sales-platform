@@ -5,6 +5,7 @@ import { UserRepository } from "../repositories/UserRepository";
 
 
 const userService = new UserService(new UserRepository())
+
 const userController = new UserController(userService)
 
 const userRouter = Router() 

@@ -3,6 +3,7 @@ import { IUserRepository } from "../../src/interface/IUserRepository";
 import { User as UserDTO } from "../../src/model/User";
 
 import { UserService } from "../../src/service/UserService";
+jest.mock("../../src/data-source")
 
 describe("User Service Test", () => {
   let userService: UserService;

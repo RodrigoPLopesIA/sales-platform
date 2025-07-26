@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import { User } from "./entity/User";
 import { CreateUserTable1753544195560 } from "./database/migrations/1753544195560-CreateUserTable";
+import logger from "./logs/Logger";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -15,3 +16,11 @@ export const AppDataSource = new DataSource({
   migrations: [CreateUserTable1753544195560],
   subscribers: [],
 });
+
+AppDataSource.initialize()
+  .then(() => {
+     logger.info(`Database is running!`)
+  })
+  .catch((error) => {
+    logger.error("Error during database initialization:", error)
+  });
