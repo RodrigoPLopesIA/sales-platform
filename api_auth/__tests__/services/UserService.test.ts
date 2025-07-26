@@ -5,6 +5,10 @@ import { User as UserDTO } from "../../src/model/User";
 import { UserService } from "../../src/service/UserService";
 jest.mock("../../src/data-source");
 
+jest.mock("bcrypt", () => ({
+  hashSync: jest.fn(() => "123456123456"),
+}));
+
 describe("User Service Test", () => {
   let userService: UserService;
   let userRepository: jest.Mocked<IUserRepository>;
@@ -16,7 +20,7 @@ describe("User Service Test", () => {
       firstName: "Rodrigo",
       lastName: "Lopes",
       email: "test@email.com",
-      password: "hashed_password_123",
+      password: "123456123456",
       createdAt: new Date("2024-01-01T10:00:00.000Z"),
       updatedAt: new Date("2024-01-01T10:00:00.000Z"),
     };
