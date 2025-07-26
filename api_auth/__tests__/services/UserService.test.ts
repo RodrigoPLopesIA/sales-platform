@@ -1,3 +1,4 @@
+import { UserService } from "../../src/service/UserService"
 
 
 describe("User Service Test", () => {
