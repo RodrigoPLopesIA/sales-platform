@@ -1,6 +1,7 @@
-import { User } from "../model/User";
+import { User } from "../entity/User";
+import {User as UserDTO} from "../model/User"
 
 
 export interface IUserRepository {
-    save(user: User) : User
+    save(user: UserDTO) : Promise<User>
 }
