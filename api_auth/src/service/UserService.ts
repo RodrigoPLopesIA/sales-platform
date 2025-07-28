@@ -14,6 +14,11 @@ export class UserService {
 
   public async authenticate({email, password}: Credentials) : Promise<User>{
     const user = await this.userRepository.findByEmail(email);
+
+    if(!user) throw new HTTPException(401, "Credentials invalid!")
+
+    if(!bcrypt.compareSync(password, user.password)) throw new HTTPException(401, "Credentials invalid!")
+      
     return user;
   }
     
