@@ -57,4 +57,16 @@ describe("User Service Test", () => {
 
 
   });
+
+
+  it("Should authenticate user", async () => {
+
+    const result = await userService.authenticate({
+        email: "test@email.com",
+        password: "123456123456",
+      })
+
+    expect(result).toBeDefined()
+
+  })
 });

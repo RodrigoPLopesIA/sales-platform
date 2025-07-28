@@ -1,3 +1,4 @@
+import { User } from "../model/User";
 import { UserService } from "../service/UserService";
 import { Request, Response } from "express";
 
@@ -9,8 +10,8 @@ export class UserController {
   }
 
   public async create(request: Request, response: Response): Promise<any> {
-    const { email, password } = request.body;
-    const user = await this.userService.save({ email, password })
+    const { email, password, firstName, lastName } = request.body as User;
+    const user = await this.userService.save({ email, password, firstName, lastName })
     return response.status(201).json(user);
   }
 }
