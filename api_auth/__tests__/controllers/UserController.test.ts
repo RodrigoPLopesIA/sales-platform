@@ -4,7 +4,7 @@ import { UserController } from "../../src/controllers/UserController";
 import request from "supertest";
 import UserValidation from "../../src/validations/UserValidations";
 import HTTPErrorMiddleware from "../../src/middlewares/HTTPErrorMiddleware";
-import HTTPErrorMessage from "../../src/exceptions/HTTPErrorMessage";
+import HTTPException from "../../src/exceptions/HTTPException";
 
 
 describe("User Controller Test", () => {
@@ -30,7 +30,7 @@ describe("User Controller Test", () => {
     app.use(express.json());
 
     app.post(
-      "/api/v1/users/register",
+      "/api/v1/register",
       UserValidation.validate(),
       userController.create.bind(userController)
     );
@@ -40,7 +40,7 @@ describe("User Controller Test", () => {
 
   it("should create a new user", async () => {
     const result = await request(app)
-      .post("/api/v1/users/register")
+      .post("/api/v1/register")
       .send({ email: "test@email.com", password: "123456123456" });
 
     expect(result.status).toEqual(201);
@@ -49,7 +49,7 @@ describe("User Controller Test", () => {
 
   it("should return error 400 when try to create a user with null values", async () => {
     const result = await request(app)
-      .post("/api/v1/users/register")
+      .post("/api/v1/register")
       .send({ email: "", password: "" });
 
     expect(result.status).toEqual(400);
@@ -59,7 +59,7 @@ describe("User Controller Test", () => {
   });
   it("should return error 400 when try to create a user with null values", async () => {
     const result = await request(app)
-      .post("/api/v1/users/register")
+      .post("/api/v1/register")
       .send({ email: "test@email.com", password: "" });
 
     expect(result.status).toEqual(400);
@@ -69,10 +69,10 @@ describe("User Controller Test", () => {
   });
   it("should return a error 400 when try to create a user exists ", async () => {
     userService.save.mockRejectedValue(
-      new HTTPErrorMessage(400, `User with test@email.com already exists`)
+      new HTTPException(400, `User with test@email.com already exists`)
     );
     const result = await request(app)
-      .post("/api/v1/users/register")
+      .post("/api/v1/register")
       .send({ email: "test@email.com", password: "123456123456" });
 
     expect(result.status).toEqual(400);

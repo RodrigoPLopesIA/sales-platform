@@ -1,7 +1,7 @@
 import { IUserRepository } from "../interface/IUserRepository";
 import { User as UserDTO } from "../model/User";
 import { User } from "../entity/User";
-import HTTPErrorMessage from "../exceptions/HTTPErrorMessage";
+import HTTPException from "../exceptions/HTTPException";
 import bcrypt from 'bcrypt'
 export class UserService {
     
@@ -14,7 +14,7 @@ export class UserService {
     data.password = bcrypt.hashSync(data.password, 10)
       
       if(await this.userRepository.existsByEmail(data.email))
-        throw new HTTPErrorMessage(400, `User with ${data.email} already exists`)
+        throw new HTTPException(400, `User with ${data.email} already exists`)
       return await this.userRepository.save(data);
       
 

@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8081;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/v1/users", userRouter);
+app.use("/api/v1/", userRouter);
 
 app.get("/api/v1/health", (req, res) => {
   return res.status(200).json({

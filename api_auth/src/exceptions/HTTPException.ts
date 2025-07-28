@@ -1,4 +1,4 @@
-class HTTPErrorMessage extends Error {
+class HTTPException extends Error {
   public status: number;
   public message: string;
 
@@ -9,4 +9,4 @@ class HTTPErrorMessage extends Error {
   }
 }
 
-export default HTTPErrorMessage
+export default HTTPException

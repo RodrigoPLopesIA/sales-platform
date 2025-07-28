@@ -1,5 +1,5 @@
 import { isCelebrateError } from "celebrate";
-import HTTPErrorMessage from "../exceptions/HTTPErrorMessage";
+import HTTPException from "../exceptions/HTTPException";
 
 class HTTPErrorMiddleware {
   public execute(err, req, res, next) {
@@ -19,7 +19,7 @@ class HTTPErrorMiddleware {
         });
       }
     }
-    if (err instanceof HTTPErrorMessage) {
+    if (err instanceof HTTPException) {
       return res.status(err.status).json({
         status: err.status,
         message: err.message,
