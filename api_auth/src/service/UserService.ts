@@ -6,13 +6,15 @@ import bcrypt from 'bcrypt'
 import { Credentials } from "../model/Credentials";
 export class UserService {
 
-
   private userRepository: IUserRepository;
+
   constructor(userRepository: IUserRepository) {
     this.userRepository = userRepository;
   }
-  authenticate(auth: Credentials) {
-    throw new Error("Method not implemented.");
+
+  async authenticate({email, password}: Credentials) : Promise<User>{
+    const user = await this.userRepository.findByEmail(email);
+    return user;
   }
     
   public async save(data: UserDTO): Promise<User> {
