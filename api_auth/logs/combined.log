@@ -302,3 +302,9 @@
 [2025-07-28T23:45:54.540Z] ERROR: Error during database initialization: connect ECONNREFUSED 127.0.0.1:5432
 [2025-07-28T23:45:57.118Z] INFO: Server running at http://localhost:8081/api/v1/health
 [2025-07-28T23:45:57.134Z] ERROR: Error during database initialization: connect ECONNREFUSED 127.0.0.1:5432
+[2025-07-28T23:54:25.175Z] INFO: Server running at http://localhost:8081/api/v1/health
+[2025-07-28T23:54:25.184Z] ERROR: Error during database initialization: connect ECONNREFUSED 127.0.0.1:5432
+[2025-07-28T23:54:42.341Z] INFO: Server running at http://localhost:8081/api/v1/health
+[2025-07-28T23:54:42.355Z] ERROR: Error during database initialization: connect ECONNREFUSED 127.0.0.1:5432
+[2025-07-28T23:54:50.939Z] INFO: Server running at http://localhost:8081/api/v1/health
+[2025-07-28T23:54:50.955Z] ERROR: Error during database initialization: connect ECONNREFUSED 127.0.0.1:5432

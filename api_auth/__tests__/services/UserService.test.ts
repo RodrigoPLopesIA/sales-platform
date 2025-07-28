@@ -28,6 +28,7 @@ describe("User Service Test", () => {
     userRepository = {
       save: jest.fn().mockResolvedValue(mockUser),
       existsByEmail: jest.fn().mockResolvedValue(false),
+      findByEmail: jest.fn().mockResolvedValue(mockUser)
     } as jest.Mocked<IUserRepository>;
 
     userService = new UserService(userRepository);
@@ -61,12 +62,13 @@ describe("User Service Test", () => {
 
   it("Should authenticate user", async () => {
 
+
     const result = await userService.authenticate({
         email: "test@email.com",
         password: "123456123456",
       })
-
-    expect(result).toBeDefined()
+    
+    expect(result).toEqual(mockUser)
 
   })
 });

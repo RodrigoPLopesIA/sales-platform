@@ -12,7 +12,7 @@ export class UserService {
     this.userRepository = userRepository;
   }
 
-  async authenticate({email, password}: Credentials) : Promise<User>{
+  public async authenticate({email, password}: Credentials) : Promise<User>{
     const user = await this.userRepository.findByEmail(email);
     return user;
   }
