@@ -1,17 +1,34 @@
-import express from "express"
-
+import 'reflect-metadata';
+import express from 'express';
+import userRouter from './routes/UserRouter';
+import logger from './logs/Logger';
+import HTTPErrorMiddleware from './middlewares/HTTPErrorMiddleware';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './SwaggerConfig';
 
 const app = express();
-const env = process.env
+const PORT = process.env.PORT || 8081;
 
-const PORT = process.env.PORT || 8080
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  }),
+);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.get("/api/v1/health", (req, res) => {
-    return res.status(200).json({
-        "status": 200,
-        "message": "API auth health"
-    })
-})
+app.use('/api/v1/', userRouter);
 
-app.listen(PORT, () => console.log("http://localhost:8080/api/v1/health"))
+app.get('/api/v1/health', (req, res) => {
+  return res.status(200).json({
+    status: 200,
+    message: 'API auth health',
+  });
+});
 
+app.use(HTTPErrorMiddleware.execute);
+
+app.listen(PORT, () =>
+  logger.info(`Server running at http://localhost:${PORT}/api/v1/health`),
+);
+export default app;
