@@ -1,3 +1,4 @@
+import { compareSync } from "bcrypt";
 import { User } from "../../src/entity/User";
 import { IUserRepository } from "../../src/interface/IUserRepository";
 import { User as UserDTO } from "../../src/model/User";
@@ -7,6 +8,7 @@ jest.mock("../../src/data-source");
 
 jest.mock("bcrypt", () => ({
   hashSync: jest.fn(() => "123456123456"),
+  compareSync: jest.fn(() => true)
 }));
 
 describe("User Service Test", () => {
@@ -61,6 +63,7 @@ describe("User Service Test", () => {
 
 
   it("Should authenticate user", async () => {
+
 
 
     const result = await userService.authenticate({
