@@ -7,6 +7,9 @@ import { Credentials } from "../model/Credentials";
 import { JWTService } from "./JWTService";
 import { Token } from "../model/Token";
 export class UserService {
+  login(arg0: { email: string; password: string; }) {
+    throw new Error("Method not implemented.");
+  }
   private userRepository: IUserRepository;
 
   constructor(userRepository: IUserRepository) {

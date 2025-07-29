@@ -14,4 +14,10 @@ export class UserController {
     const user = await this.userService.save({ email, password, firstName, lastName })
     return response.status(201).json(user);
   }
+
+  public async login(request: Request, response: Response): Promise<any> {
+    const {email, password} = request.body as User
+    const token = await this.userService.authenticate({email, password});
+    return response.status(200).json(token)
+  }
 }

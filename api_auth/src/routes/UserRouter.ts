@@ -11,8 +11,13 @@ const userRouter = Router();
 
 userRouter.post(
   "/register",
-  UserValidation.validate(),
+  UserValidation.register(),
   userController.create.bind(userController)
+);
+userRouter.post(
+  "/login",
+  UserValidation.register(),
+  userController.login.bind(userController)
 );
 
 export default userRouter;
