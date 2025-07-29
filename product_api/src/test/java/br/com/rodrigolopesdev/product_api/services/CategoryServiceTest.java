@@ -11,6 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -25,14 +29,28 @@ public class CategoryServiceTest {
 
     @Test
     public void shouldReturnAllCategories() {
+        // Arrange
         List<Category> categories = List.of(Category.builder().name("Test").build());
-        var list = categories.stream().map(ListCategoryDTO::new).toList();
-        Mockito.when(categoryRepository.findAll()).thenReturn(categories);
+        List<ListCategoryDTO> categoriesDto = categories.stream()
+                .map(ListCategoryDTO::new)
+                .toList();
 
-        var result = categoryService.find();
+        Pageable pageable = PageRequest.of(1, 20);
+        Page<Category> pageRepository = new PageImpl<>(categories, pageable, 1);
+        Page<ListCategoryDTO> expectedPage = new PageImpl<>(categoriesDto, pageable, 1);
 
-        Assertions.assertThat(result).isEqualTo(list);
+        // Mock
+        Mockito.when(categoryRepository.findAll(pageable)).thenReturn(pageRepository);
 
-        Mockito.verify(categoryRepository, Mockito.times(1)).findAll();
+        // Act
+        Page<ListCategoryDTO> result = categoryService.find(pageable);
+
+        // Assert
+        Assertions.assertThat(result.getContent()).isEqualTo(expectedPage.getContent());
+        Assertions.assertThat(result.getTotalElements()).isEqualTo(expectedPage.getTotalElements());
+        Assertions.assertThat(result.getPageable()).isEqualTo(expectedPage.getPageable());
+
+        Mockito.verify(categoryRepository, Mockito.times(1)).findAll(pageable);
     }
+
 }
