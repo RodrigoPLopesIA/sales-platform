@@ -21,7 +21,7 @@ import java.util.UUID;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
 
@@ -47,7 +47,6 @@ public class Product {
 
     @Column(nullable = false)
     private Boolean isActive = true;
-
 
     @ManyToOne()
     @JoinColumn(name = "supplier_id")

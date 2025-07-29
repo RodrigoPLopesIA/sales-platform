@@ -18,6 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Table(name = "categories")
+@Builder
 @EntityListeners(AuditingEntityListener.class)
 public class Category {
 
@@ -26,7 +27,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
 
