@@ -132,3 +132,4 @@
 [2025-07-29T01:33:39.954Z] ERROR: Error during database initialization: connect ECONNREFUSED 127.0.0.1:5432
 [2025-07-29T01:38:47.106Z] ERROR: Error during database initialization: connect ECONNREFUSED 127.0.0.1:5432
 [2025-07-29T01:38:53.132Z] ERROR: Error during database initialization: connect ECONNREFUSED 127.0.0.1:5432
+[2025-07-29T02:59:22.994Z] ERROR: Error during database initialization: connect ECONNREFUSED 127.0.0.1:5432

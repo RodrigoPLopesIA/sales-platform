@@ -3,7 +3,8 @@ import express from 'express';
 import userRouter from './routes/UserRouter';
 import logger from './logs/Logger';
 import HTTPErrorMiddleware from './middlewares/HTTPErrorMiddleware';
-import { errors } from 'celebrate';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './SwaggerConfig';
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -14,6 +15,7 @@ app.use(
     extended: true,
   }),
 );
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api/v1/', userRouter);
 
